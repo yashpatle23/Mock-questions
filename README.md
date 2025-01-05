@@ -2,6 +2,10 @@
 
 This is a Mock Test Application that allows users to register, log in, take quizzes, and view their scores. The application is built using HTML, CSS, JavaScript, and PHP, and uses MySQL for the database.
 
+## Deployment
+
+This application is deployed at [http://mockquestions.rf.gd](http://mockquestions.rf.gd) with the help of [infinityfree.com](https://infinityfree.com/). For detailed deployment instructions, refer to this [video tutorial](https://www.youtube.com/watch?v=RTO8uM7GeS8&ab_channel=Training%40DigiCoders).
+
 ## Features
 
 - User Registration
@@ -22,12 +26,12 @@ This is a Mock Test Application that allows users to register, log in, take quiz
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/mock-test-application.git
+   git clone https://github.com/yashpatle23/Mock-questions.git
    ```
 
 2. **Move the project to the XAMPP `htdocs` directory:**
    ```bash
-   mv mock-test-application /c/xampp/htdocs/
+   mv mock-questions /c/xampp/htdocs/
    ```
 
 3. **Start the XAMPP server:**
@@ -43,6 +47,8 @@ This is a Mock Test Application that allows users to register, log in, take quiz
    - Click on the "Import" tab.
    - Choose the SQL file provided in the repository (`mock_test_db.sql`).
    - Click "Go" to import the database.
+
+   The SQL file for the database is provided in the repository with the name `mock_test_db.sql`.
 
 6. **Access the application:**
    - Open a web browser.

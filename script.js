@@ -172,7 +172,7 @@ function showResultBox(){
 
 function saveScore(score) {
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "save_score.php", true);
+  xhr.open("POST", "api/save_score.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
