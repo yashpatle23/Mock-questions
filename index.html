@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="main">
+      <header class="header">
+        <a href="#" class="logo">MOCK TEST APPLICATION</a>
+        <nav class="navbar">
+          <a href="#" class="active">Home</a>
+          <a href="#">About</a>
+          <a href="scores.php">Scores</a>
+          <a href="login.html" class="loginbtn" style="width:auto;">Login</a>
+          <a href="register.html" class="registerbtn" style="width:auto;">Register</a>
+          <a href="logout.php" class="logoutbtn" style="display:none; width:auto;">Logout</a>
+        </nav>
+      </header>
+
+      <!-- question code -->
+      <div class="container">
+        <section class="quiz-section">
+          <div class="quiz-box">
+            <h1>Mock Test</h1>
+            <div class="quiz-header">
+              <!-- <span>Time</span> -->
+              <span>Time: <span id="timer">02:00</span></span>
+              <span class="header-score">score:0/10</span>
+            </div>
+            <h2 class="question-text">Which of the following is not an OOPS concept?</h2>
+            <div class="option-list"></div>
+            <div class="quiz-footer">
+              <span class="question-total">1 out of 10</span>
+              <button class="next-btn">Next</button>
+            </div>
+          </div>
+
+          <div class='result-box'>
+            <h2>Test Result</h2>
+            <div class="percentage-container">
+              <div class="circular-progress">
+                <span class="progress-value">0%</span>
+              </div>
+              <span class="score-text">your score 0 out of 10</span>
+            </div>
+            <div class="buttons">
+              <button class="tryAgain-btn">Try Again</button>
+              <button class="goHome-btn">Go To Home</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="home">
+          <div class="home-content">
+            <h1>Mock Test Application</h1>
+            <p id="welcome-message">
+              Welcome to the Mock Test Application! This platform offers a range of practice exams designed 
+              to help you prepare for real-world tests. Choose from various subjects and difficulty levels, 
+              and track your progress through detailed performance analytics. Each test simulates actual exam conditions, 
+              providing timed sessions . Perfect for students and professionals aiming 
+              to improve their skills and boost confidence before the big day.
+            </p>
+            <button class="start-btn">start test</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- rule code -->
+    <div class="popup-info">
+      <h2>Test Guide</h2>
+      <span class="info">1. Each question has four options, with only one correct answer.</span>
+      <span class="info">2. No Negative marking applies for incorrect answers.</span>
+      <span class="info">3. Once submitted, answers cannot be changed .</span>
+      <span class="info">4. The exam has a fixed time limit for completion.</span>
+      <span class="info">5. Marks are awarded for correct answers,</span>
+      <div class="btn-group">
+        <button class="info-btn exit-btn">Exist Test</button>
+        <a href="#" class="info-btn continue-btn">Continue</a>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2023 Mock Test Application. All rights reserved.</p>
+    </footer>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // Display welcome message if username is provided
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      if (username) {
+        document.getElementById('welcome-message').innerHTML = `Hi ${username},<br>Welcome to the Mock Test Application! This platform offers a range of practice exams designed to help you prepare for real-world tests. Choose from various subjects and difficulty levels, and track your progress through detailed performance analytics. Each test simulates actual exam conditions, providing timed sessions. Perfect for students and professionals aiming to improve their skills and boost confidence before the big day.`;
+        document.querySelector('.loginbtn').style.display = 'none';
+        document.querySelector('.registerbtn').style.display = 'none';
+        document.querySelector('.logoutbtn').style.display = 'block';
+      }
+    </script>
+  </body>
+</html>
+
