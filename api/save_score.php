@@ -1,9 +1,12 @@
 <?php
 session_start();
-$servername = "mocktestdb.c5k44400ucqt.eu-north-1.rds.amazonaws.com";
-$username = "admin";
-$password = "SecurePass123!";
-$dbname = "mocktestdb";
+include '../session_manager.php';
+checkLogin();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mock_test_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

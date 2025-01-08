@@ -1,5 +1,10 @@
 <?php
-session_start();
+include 'session_manager.php';
+checkLogin();
+
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -13,14 +18,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-    $sql = "SELECT score, created_at FROM scores WHERE username='$username' ORDER BY created_at DESC";
-    $result = $conn->query($sql);
-} else {
-    echo "<script>window.location.href='login.html';</script>";
-    exit();
-}
+$username = $_SESSION['username'];
+$sql = "SELECT score, created_at FROM scores WHERE username='$username' ORDER BY created_at DESC";
+$result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">

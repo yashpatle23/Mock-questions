@@ -12,7 +12,7 @@
         <a href="#" class="logo">MOCK TEST APPLICATION</a>
         <nav class="navbar">
           <a href="#" class="active">Home</a>
-          <a href="#">About</a>
+          <a href="about.html">About</a>
           <a href="scores.php">Scores</a>
           <a href="login.html" class="loginbtn" style="width:auto;">Login</a>
           <a href="register.html" class="registerbtn" style="width:auto;">Register</a>
@@ -99,6 +99,17 @@
         document.querySelector('.registerbtn').style.display = 'none';
         document.querySelector('.logoutbtn').style.display = 'block';
       }
+
+      // Ensure user is logged in before starting the test
+      document.querySelector('.start-btn').onclick = () => {
+        if (!username) {
+          alert('You must be logged in to start the test.');
+          window.location.href = 'login.html';
+        } else {
+          document.querySelector('.popup-info').classList.add('active');
+          document.querySelector('.main').classList.add('active');
+        }
+      };
     </script>
   </body>
 </html>

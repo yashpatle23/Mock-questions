@@ -6,19 +6,25 @@ const continueBtn = document.querySelector(".continue-btn");
 const quizSection = document.querySelector(".quiz-section");
 const quizBox = document.querySelector(".quiz-box");
 const resultBox = document.querySelector(".result-box");
-const tryAgainBtn = document.querySelector('.tryAgain-btn');
-const goHomeBtn = document.querySelector('.goHome-btn')
+const tryAgainBtn = document.querySelector(".tryAgain-btn");
+const goHomeBtn = document.querySelector(".goHome-btn");
 const timerElement = document.getElementById("timer");
 
 //login
 
-
 let timer;
-let timeLeft = 120; 
+let timeLeft = 600; // 10 minutes
 
 startBtn.onclick = () => {
-  popupInfo.classList.add("active"); /* on click on start btn open rule page */
-  main.classList.add("active");
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get('username');
+  if (!username) {
+    alert('You must be logged in to start the test.');
+    window.location.href = 'login.html';
+  } else {
+    popupInfo.classList.add("active"); /* on click on start btn open rule page */
+    main.classList.add("active");
+  }
 };
 
 exitBtn.onclick = () => {
@@ -32,7 +38,7 @@ continueBtn.onclick = () => {
   popupInfo.classList.remove("active");
   main.classList.remove("active");
   quizBox.classList.add("active");
-  
+
   startTimer();
   showQuestions(0);
   questionCounter(1);
@@ -44,35 +50,47 @@ tryAgainBtn.onclick = () => {
   nextBtn.classList.remove("active");
   resultBox.classList.remove("active");
 
-questionCount = 0;
- questionNumb = 1;
- userScore = 0;
- showQuestions(questionCount);
- questionCounter(questionNumb);
+  questionCount = 0;
+  questionNumb = 1;
+  userScore = 0;
+  showQuestions(questionCount);
+  questionCounter(questionNumb);
 
- headerScore();
-}
+  headerScore();
+};
 
 goHomeBtn.onclick = () => {
   quizSection.classList.remove("active");
   nextBtn.classList.remove("active");
   resultBox.classList.remove("active");
 
-questionCount = 0;
- questionNumb = 1;
- userScore = 0;
- showQuestions(questionCount);
- questionCounter(questionNumb);
-
- 
-}
-
-
+  questionCount = 0;
+  questionNumb = 1;
+  userScore = 0;
+  showQuestions(questionCount);
+  questionCounter(questionNumb);
+};
 
 let questionCount = 0;
 let questionNumb = 1;
 let userScore = 0;
 const nextBtn = document.querySelector(".next-btn");
+const skipBtn = document.createElement("button");
+skipBtn.classList.add("skip-btn");
+skipBtn.textContent = "Skip";
+nextBtn.parentNode.insertBefore(skipBtn, nextBtn);
+
+skipBtn.onclick = () => {
+  if (questionCount < questions.length - 1) {
+    questionCount++;
+    showQuestions(questionCount);
+    questionNumb++;
+    questionCounter(questionNumb);
+    nextBtn.classList.remove("active");
+  } else {
+    showResultBox();
+  }
+};
 
 nextBtn.onclick = () => {
   if (questionCount < questions.length - 1) {
@@ -82,7 +100,7 @@ nextBtn.onclick = () => {
     questionNumb++;
     questionCounter(questionNumb);
 
-    nextBtn.classList.remove('active');
+    nextBtn.classList.remove("active");
   } else {
     // console.log("question completed");
     showResultBox();
@@ -107,8 +125,8 @@ function showQuestions(index) {
   }
 }
 function optionSelected(answer) {
-  let userAnswer = answer.textContent; 
-  let correctAnswer = questions[questionCount].answer; 
+  let userAnswer = answer.textContent;
+  let correctAnswer = questions[questionCount].answer;
   let allOptions = optionlist.children.length;
 
   if (userAnswer === correctAnswer) {
@@ -120,18 +138,18 @@ function optionSelected(answer) {
   } else {
     answer.classList.add("incorrect");
     // console.log('wrong');
-  
+
     for (let i = 0; i < allOptions; i++) {
       if (optionlist.children[i].textContent == correctAnswer) {
         optionlist.children[i].setAttribute("class", "option correct");
       }
     }
   }
- 
+
   for (let i = 0; i < allOptions; i++) {
     optionlist.children[i].classList.add("disabled");
   }
-  nextBtn.classList.add('active');
+  nextBtn.classList.add("active");
 }
 
 function questionCounter(index) {
@@ -142,29 +160,30 @@ function headerScore() {
   const headerScoreText = document.querySelector(".header-score");
   headerScoreText.textContent = `Score:${userScore}/${questions.length}`;
 }
-function showResultBox(){
-  quizBox.classList.remove('active');
-  resultBox.classList.add('active');
+function showResultBox() {
+  quizBox.classList.remove("active");
+  resultBox.classList.add("active");
 
-  const scoreText = document.querySelector('.score-text');
+  const scoreText = document.querySelector(".score-text");
   scoreText.textContent = `your score ${userScore} out of ${questions.length}`;
 
-  const circularProgress = document.querySelector('.circular-progress');
-  const progressValue = document.querySelector('.progress-value');
+  const circularProgress = document.querySelector(".circular-progress");
+  const progressValue = document.querySelector(".progress-value");
   let progressStartValue = -1;
-  let progressEndValue = (userScore/questions.length)* 100;
+  let progressEndValue = (userScore / questions.length) * 100;
   let speed = 20;
 
-  let progress = setInterval(()=> {
+  let progress = setInterval(() => {
     progressStartValue++;
-   progressValue.textContent = `${progressStartValue}%`;
-   
-   circularProgress.style.background = `conic-gradient(#075C9D ${progressStartValue * 3.6}deg, rgba(255,255,255,.1)0deg)`;
-   if (progressStartValue == progressEndValue){
+    progressValue.textContent = `${progressStartValue}%`;
+
+    circularProgress.style.background = `conic-gradient(#075C9D ${
+      progressStartValue * 3.6
+    }deg, rgba(255,255,255,.1)0deg)`;
+    if (progressStartValue == progressEndValue) {
       clearInterval(progress);
     }
-    
-  },speed)
+  }, speed);
 
   // Save score to database
   saveScore(userScore);
@@ -191,8 +210,9 @@ function startTimer() {
       let minutes = Math.floor(timeLeft / 60);
       let seconds = timeLeft % 60;
 
-     
-      timerElement.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+      timerElement.textContent = `${minutes < 10 ? "0" : ""}${minutes}:${
+        seconds < 10 ? "0" : ""
+      }${seconds}`;
 
       timeLeft--;
     }

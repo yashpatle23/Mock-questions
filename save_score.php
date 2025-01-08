@@ -1,5 +1,8 @@
 <?php
 session_start();
+include 'session_manager.php';
+checkLogin();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
