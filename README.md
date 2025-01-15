@@ -97,4 +97,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 ### Contact
 
-For any questions or feedback, please contact [yourname@example.com](mailto:yourname@example.com).
+For any questions or feedback, please contact [yashpatle.job@gmail.com](mailto:yashpatle.job@gmail.com).
